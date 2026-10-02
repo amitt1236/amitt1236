@@ -14,4 +14,5 @@ authors:
   - Oren Freifeld
 links:
   arXiv: https://arxiv.org/abs/2608.10805
+  Code: https://github.com/BGU-CS-VIL/WTConv/tree/main/fast_wtconv
 ---
