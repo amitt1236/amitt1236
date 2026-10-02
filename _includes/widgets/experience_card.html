@@ -1,0 +1,80 @@
+{% assign section_count = 0 %}
+{% if site.data.profile.education %}{% assign section_count = section_count | plus: 1 %}{% endif %}
+{% if site.data.profile.experience %}{% assign section_count = section_count | plus: 1 %}{% endif %}
+{% if site.data.profile.awards %}{% assign section_count = section_count | plus: 1 %}{% endif %}
+{% if section_count > 1 %}
+    {% assign col_class = "col-lg-6" %}{% assign heading_class = "" %}{% assign list_class = "list-unstyled mb-1" %}{% assign item_class = "media mb-3" %}
+{% else %}
+    {% assign col_class = "col-12" %}{% assign heading_class = "mb-3" %}{% assign list_class = "row justify-content-center list-unstyled mb-1" %}{% assign item_class = "col-md-auto media mb-3 mx-md-5" %}
+{% endif %}
+<div class="row mt-3">
+    <div class="col">
+        <div class="card border-0 shadow-sm bg-white">
+            <div class="card-body p-4">
+                <div class="row" data-masonry='{"percentPosition": true }'>
+                    {% if site.data.profile.education %}
+                    <div class="{{ col_class }}">
+                        <div class="mx-2 my-1">
+                            <h6 class="{{ heading_class }}">Education</h6>
+                            <ul class="{{ list_class }}">
+                                {% for item in site.data.profile.education %}
+                                <li class="{{ item_class }}">
+                                    <img src="{{ item.logo | relative_url }}" alt="{{ item.name }}" style="width: 40px; height: 40px; object-fit: contain;" class="mr-3">
+                                    <div class="media-body">
+                                        <div class="font-weight-bold">{{ item.name }}</div>
+                                        {% if item.dept %}<div class="small">{{ item.dept }}</div>{% endif %}
+                                        <div class="small">{{ item.position }}</div>
+                                        <div class="small text-muted no-break"><em>{{ item.date }}</em></div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if site.data.profile.experience %}
+                    <div class="{{ col_class }}">
+                        <div class="mx-2 my-1">
+                            <h6 class="{{ heading_class }}">Experience</h6>
+                            <ul class="{{ list_class }}">
+                                {% for item in site.data.profile.experience %}
+                                <li class="{{ item_class }}">
+                                    <img src="{{ item.logo | relative_url }}" alt="{{ item.name }}" style="width: 40px; height: 40px; object-fit: contain;" class="mr-3">
+                                    <div class="media-body">
+                                        <div class="font-weight-bold">{{ item.name }}</div>
+                                        {% if item.dept %}<div class="small">{{ item.dept }}</div>{% endif %}
+                                        <div class="small">{{ item.position }}</div>
+                                        <div class="small text-muted no-break"><em>{{ item.date }}</em></div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if site.data.profile.awards %}
+                    <div class="{{ col_class }}">
+                        <div class="mx-2 my-1">
+                            <h6>Honors & Awards</h6>
+                            <ul class="list small pl-3 mb-1">
+                                {% for item in site.data.profile.awards %}
+                                <li>
+                                    <div class="d-flex">
+                                        <div>{{ item.name }}</div>
+                                        <div class="ml-auto mt-auto no-break"><em>{{ item.date }}</em></div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
