@@ -109,7 +109,18 @@ a:hover {
 main.container {
     flex: 1 0 auto;
     padding-top: 56px;
-    padding-bottom: 96px;
+    padding-bottom: 40px;
+}
+
+@media (max-width: 640px) {
+    main.container {
+        padding-top: 24px;
+    }
+
+    /* The home page hero starts right under the navbar. */
+    main.container:has(> .hero:first-child) {
+        padding-top: 0;
+    }
 }
 
 /* ------------------------------------------------------------------ */
@@ -228,7 +239,11 @@ main.container {
 .hero {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-areas: "text photo";
+    grid-template-areas:
+        "name      photo"
+        "positions photo"
+        "bio       photo"
+        "links     photo";
     column-gap: 48px;
     align-items: start;
 }
@@ -242,11 +257,8 @@ main.container {
     box-shadow: 0 0 0 1px var(--border), var(--portrait-shadow);
 }
 
-.hero-text {
-    grid-area: text;
-}
-
 .hero-name {
+    grid-area: name;
     font-size: clamp(2.125rem, 1.6rem + 1.6vw, 2.75rem);
     font-weight: 700;
     letter-spacing: -0.03em;
@@ -261,6 +273,7 @@ main.container {
 }
 
 .hero-positions {
+    grid-area: positions;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -289,6 +302,7 @@ main.container {
 }
 
 .hero-bio {
+    grid-area: bio;
     margin-top: 24px;
     color: var(--text-2);
     font-size: 1.0625rem;
@@ -299,7 +313,20 @@ main.container {
     margin-top: 14px;
 }
 
+.hero-bio a {
+    text-decoration: underline;
+    text-decoration-color: rgba(36, 83, 212, 0.3);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.15s ease;
+}
+
+.hero-bio a:hover {
+    text-decoration-color: currentColor;
+}
+
 .hero-links {
+    grid-area: links;
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
@@ -307,16 +334,30 @@ main.container {
 }
 
 @media (max-width: 640px) {
+    /* Portrait sits top-right with the name aligned to its bottom edge;
+       everything below spans the full width. */
     .hero {
-        grid-template-columns: minmax(0, 1fr);
-        grid-template-areas: "photo" "text";
-        row-gap: 24px;
+        grid-template-areas:
+            "name      photo"
+            "positions positions"
+            "bio       bio"
+            "links     links";
+        column-gap: 16px;
     }
 
     .hero-portrait {
-        width: 96px;
-        height: 96px;
-        border-radius: 50%;
+        /* Nudged in from the edge and down so it centres on the name. */
+        position: relative;
+        top: 26px;
+        right: 16px;
+        width: 88px;
+        height: 88px;
+        border-radius: 16px;
+    }
+
+    .hero-name {
+        align-self: end;
+        font-size: 2rem;
     }
 
     .hero-positions {
