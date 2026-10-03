@@ -41,7 +41,7 @@
         const paperId = typeof data.paperId === 'string' && data.paperId ? data.paperId : id;
         elementsById.get(id).forEach(element => {
             const link = document.createElement('a');
-            link.className = 'badge badge-pill badge-publication badge-info';
+            link.className = 'pub-link pub-citations';
             link.href = `https://www.semanticscholar.org/paper/${encodeURIComponent(paperId)}`;
             link.target = '_blank';
             link.rel = 'noopener noreferrer';

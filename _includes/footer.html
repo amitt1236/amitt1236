@@ -1,16 +1,8 @@
-<footer class="footer flex-shrink-0 border-top py-2 mt-5 bg-white small">
-    <div class="{% if page.container_class %}{{ page.container_class }}{% else %}container-lg{% endif %}">
-        <div class="row my-3">
-            <div class="col-6">
-                <div class="text-muted">
-                    <i>Last updated: {{ "now" | date: "%b %Y" }}</i>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="text-right text-muted">
-                    {{ site.data.display.footer_text }}
-                </div>
-            </div>
-        </div>
+{% assign footer_text = site.data.display.footer_text | strip %}
+<footer class="site-footer">
+    <div class="container footer-inner">
+        <span>&copy; {{ "now" | date: "%Y" }} {{ site.data.profile.primary_name }}</span>
+        {% if footer_text != "" %}<span>{{ footer_text }}</span>{% endif %}
+        <span>Last updated {{ "now" | date: "%b %Y" }}</span>
     </div>
 </footer>
